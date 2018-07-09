@@ -41,6 +41,9 @@ def getSingleXy(stock,item):
     feature.append(sc.SO([i[2] for i in x],[i[3] for i in x],stock[key][idx][4]))
     feature.append(sc.RSI([i[4] for i in x]))
     X.append(feature)
-    change=float(stock[key][idx+1][4])/float(stock[key][idx][4])
+    if(len(stock[key])<=(idx+1)):
+        change=1.0
+    else:
+        change=float(stock[key][idx+1][4])/float(stock[key][idx][4])
     y.append(sc.class_calc(change))
     return X,y

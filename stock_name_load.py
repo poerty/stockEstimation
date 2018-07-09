@@ -1,5 +1,7 @@
 import csv
 
+nolist=['5980','271980']
+
 def all_stock_name_load():
     x=[]
     file='stockname.csv'
@@ -7,6 +9,8 @@ def all_stock_name_load():
         csv_reader=csv.reader(csvfile)
         next(csv_reader)
         for row in csv_reader:
+            if row[1] in nolist:
+                continue
             l=[]
             l.append('{0:06d}'.format(int(row[1])))
             l.append(row[2])

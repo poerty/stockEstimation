@@ -9,7 +9,7 @@ stock_names=snl.all_stock_name_load()
 
 # execute daily
 # update/write csv file to ./kospi/path
-# sdl.all_stock_data_download(stock_names)
+#sdl.all_stock_data_download(stock_names)
 # stock data is like date/open/high/low/close/adj close/volumn
 
 stock_datas=sdl.all_stock_data_load(stock_names)
@@ -24,17 +24,16 @@ logistic_regression.fit(X,y)
 full_essential_index=es.get_essential_index_today(stock_datas,14)
 
 for item in full_essential_index:
-    if(item['date']>='2018-05-01'):
+    if(item['date']>='2018-07-01'):
         X,y=md.getSingleXy(stock_datas,item)
         prediction=logistic_regression.predict(X)
         if(prediction[0]>=105):
             #print(item,": ",prediction[0])
             print(item['key'],stock_names[[i[0] for i in stock_names].index(item['key'])][1])
-            print("%s 종가 : %f-> %s 종가 : %f" %(item['date'],
-                                                float(stock_datas[item['key']][item['idx']][4]),
-                                                "익일",
-                                                float(stock_datas[item['key']][item['idx']+1][4])))
-            print("상승률 : %f" %(float(stock_datas[item['key']][item['idx']+1][4])/float(stock_datas[item['key']][item['idx']][4])))
+            print("%s 종가 : %f" %(item['date'],float(stock_datas[item['key']][item['idx']][4])))
+            if(len(stock_datas[item['key']])>(item['idx']+1)):
+                print("%s 싯가 : %f 종가 : %f" %("익일",float(stock_datas[item['key']][item['idx']+1][3]),float(stock_datas[item['key']][item['idx']+1][4])))
+                print("상승률 : %f" %(float(stock_datas[item['key']][item['idx']+1][4])/float(stock_datas[item['key']][item['idx']][4])))
 '''
 X,y,date=md.getXy(stock_datas,full_essential_index)
 for i in range(0,len(X)):

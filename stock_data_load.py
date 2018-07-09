@@ -16,7 +16,7 @@ def delete_kospi():
 
 def save_kospi(stock_names):
     yf.pdr_override()    
-    for stock in stock_name:
+    for stock in stock_names:
         kor_name = stock[1]
         ticker = stock[0]
         df = data.get_data_yahoo(ticker + '.KS', '1996-05-06', thread=100)
