@@ -1,8 +1,10 @@
-def get_essential_index(stock_datas,head_len):
+def get_essential_index(stock_datas,head_len,date_end):
     indexSet=[]
     for key in stock_datas.keys():
         for idx in range(head_len,len(stock_datas[key])-1):
             date=stock_datas[key][idx][0]
+            if(date>date_end):
+                break
             if(float(stock_datas[key][idx-1][4])!=0):
                 up=float(stock_datas[key][idx][4])/float(stock_datas[key][idx-1][4])
                 if up>1.2:

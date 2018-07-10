@@ -1,6 +1,6 @@
 import csv
 
-nolist=['5980','271980']
+nolist=['5980','271980','145210']
 
 def all_stock_name_load():
     x=[]
